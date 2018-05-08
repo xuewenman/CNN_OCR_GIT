@@ -4,13 +4,9 @@ import numpy as np
 from PIL import Image
 import pickle
 
-# path of data file
-data_dir = 'data'
+data_dir = '../data'
 train_data_dir = os.path.join(data_dir, 'HWDB1.1trn_gnt')
 test_data_dir = os.path.join(data_dir, 'HWDB1.1tst_gnt')
-
-#print(train_data_dir)
-#print(test_data_dir)
 
 
 def read_from_gnt_dir(gnt_dir=train_data_dir):
@@ -54,7 +50,7 @@ test_counter = 0
 for image, tagcode in read_from_gnt_dir(gnt_dir=train_data_dir):
     tagcode_unicode = struct.pack('>H', tagcode).decode('gb2312')
     im = Image.fromarray(image)
-    dir_name = 'data/train/' + '%0.5d' % char_dict[tagcode_unicode]
+    dir_name = '../data/train/' + '%0.5d' % char_dict[tagcode_unicode]
     if not os.path.exists(dir_name):
         os.mkdir(dir_name)
     im.convert('RGB').save(dir_name + '/' + str(train_counter) + '.png')
@@ -62,7 +58,7 @@ for image, tagcode in read_from_gnt_dir(gnt_dir=train_data_dir):
 for image, tagcode in read_from_gnt_dir(gnt_dir=test_data_dir):
     tagcode_unicode = struct.pack('>H', tagcode).decode('gb2312')
     im = Image.fromarray(image)
-    dir_name = 'data/test/' + '%0.5d' % char_dict[tagcode_unicode]
+    dir_name = '../data/test/' + '%0.5d' % char_dict[tagcode_unicode]
     if not os.path.exists(dir_name):
         os.mkdir(dir_name)
     im.convert('RGB').save(dir_name + '/' + str(test_counter) + '.png')
